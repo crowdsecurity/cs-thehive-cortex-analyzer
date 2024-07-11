@@ -1,0 +1,99 @@
+services:
+  thehive:
+    image: strangebee/thehive:5.2
+    depends_on:
+      - cassandra
+      - elasticsearch
+      - minio
+      - cortex
+    ports:
+      - "9000:9000"
+    environment:
+      - JVM_OPTS="-Xms1024M -Xmx1024M"
+      - HIVE_SECRET="${HIVE_SECRET}"
+      - CORTEX_KEY="${CORTEX_KEY}"
+    command:
+      - --secret
+      - "${HIVE_SECRET}"
+      - "--cql-hostnames"
+      - "cassandra"
+      - "--index-backend"
+      - "elasticsearch"
+      - "--es-hostnames"
+      - "elasticsearch"
+      - "--s3-endpoint"
+      - "http://minio:9000"
+      - "--s3-access-key"
+      - "minioadmin"
+      - "--s3-secret-key"
+      - "minioadmin"
+      - "--s3-bucket"
+      - "thehive"
+      - "--s3-use-path-access-style"
+      - "--cortex-hostnames"
+      - "cortex"
+      - "--cortex-keys"
+      # put cortex api key once cortex is bootstraped
+      - "${CORTEX_KEY}"
+
+  cassandra:
+    image: 'cassandra:4'
+    ports:
+      - "9042:9042"
+    environment:
+      - MAX_HEAP_SIZE=1024M
+      - HEAP_NEWSIZE=1024M
+      - CASSANDRA_CLUSTER_NAME=TheHive
+    volumes:
+      - cassandradata:/var/lib/cassandra
+    restart: on-failure
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.12
+    ports:
+      - "9200:9200"
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms${ELASTIC_MEMORY_SIZE} -Xmx${ELASTIC_MEMORY_SIZE}"
+    volumes:
+      - elasticsearchdata:/usr/share/elasticsearch/data
+    restart: on-failure
+
+  minio:
+    image: quay.io/minio/minio
+    mem_limit: 512m
+    command: ["minio", "server", "/data", "--console-address", ":9090"]
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+    ports:
+      - "9090:9090"
+    volumes:
+      - "miniodata:/data"
+
+  cortex:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - elasticsearch
+    environment:
+      - job_directory=/tmp/cortex-jobs
+      - HIVE_SECRET="${HIVE_SECRET}"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /tmp/cortex-jobs:/tmp/cortex-jobs
+      - ./cortex/application.conf:/etc/cortex/application.conf
+      - ../src/analyzer:/opt/cortex/analyzers
+    ports:
+      - "9001:9001"
+    restart: on-failure
+    command:
+      - --secret
+      - "${HIVE_SECRET}"
+
+volumes:
+  miniodata:
+  cassandradata:
+  elasticsearchdata:
