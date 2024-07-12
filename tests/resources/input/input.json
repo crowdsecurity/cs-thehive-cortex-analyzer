@@ -1,0 +1,27 @@
+{
+    "data": "TEST.IP.186.190",
+    "tlp": 0,
+    "parameters": {},
+    "dataType": "ip",
+    "config": {
+        "jobTimeout": 30,
+        "service": "",
+        "url": "",
+        "api_key": "TEST_KEY",
+        "proxy_http": "",
+        "proxy": {
+            "http": "",
+            "https": ""
+        },
+        "max_tlp": 2,
+        "max_pap": 2,
+        "check_tlp": true,
+        "check_pap": true,
+        "proxy_https": "",
+        "cacerts": "",
+        "auto_extract_artifacts": false,
+        "jobCache": 10
+    },
+    "pap": 2,
+    "message": "1"
+    }

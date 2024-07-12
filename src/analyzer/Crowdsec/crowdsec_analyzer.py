@@ -6,8 +6,8 @@ from datetime import datetime
 
 
 class CrowdsecAnalyzer(Analyzer):
-    def __init__(self):
-        Analyzer.__init__(self)
+    def __init__(self, job_directory=None):
+        Analyzer.__init__(self, job_directory)
         self.crowdsec_key = self.get_param("config.api_key", None, "Missing Crowdsec API key")
         self.crowdsec_client = None
         self.verbose_taxonomies = self.get_param("config.verbose_taxonomies", False)
@@ -42,7 +42,6 @@ class CrowdsecAnalyzer(Analyzer):
         #            taxonomies.append(self.build_taxonomy(levelorange, namespace, 'Attack_details', attackdetails['name']))
 
         return {"taxonomies": taxonomies}
-
 
     def run(self):
         Analyzer.run(self)
