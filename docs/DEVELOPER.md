@@ -151,10 +151,10 @@ docker compose down && docker compose up -d
 ### Set a virtual environment
 
 ```bash
-cd src/analyzer/Crowdsec
+cd crowdsec-thehive-cortex/cs-thehive-cortex-analyzer
 virtualenv env
 source ./env/bin/activate
-pip install -r requirements.txt
+pip install -r tests/requirements.txt
 ```
 
 ### Create a test input

@@ -1,0 +1,100 @@
+{
+  "taxonomies": [
+    {
+      "level": "info",
+      "namespace": "Crowdsec",
+      "predicate": "ASN",
+      "value": "M247 Europe SRL"
+    },
+    {
+      "level": "info",
+      "namespace": "Crowdsec",
+      "predicate": "Score",
+      "value": 5
+    },
+    {
+      "level": "info",
+      "namespace": "Crowdsec",
+      "predicate": "LastSeen",
+      "value": "2024-04-18T08:15:00+00:00"
+    },
+    {
+      "level": "suspicious",
+      "namespace": "Crowdsec",
+      "predicate": "Attack",
+      "value": "crowdsecurity/CVE-2022-26134"
+    },
+    {
+      "level": "suspicious",
+      "namespace": "Crowdsec",
+      "predicate": "Attack",
+      "value": "crowdsecurity/http-path-traversal-probing"
+    },
+    {
+      "level": "suspicious",
+      "namespace": "Crowdsec",
+      "predicate": "Attack",
+      "value": "crowdsecurity/http-sensitive-files"
+    },
+    {
+      "level": "suspicious",
+      "namespace": "Crowdsec",
+      "predicate": "Attack",
+      "value": "crowdsecurity/http-probing"
+    },
+    {
+      "level": "suspicious",
+      "namespace": "Crowdsec",
+      "predicate": "Attack",
+      "value": "crowdsecurity/http-cve-2021-41773"
+    },
+    {
+      "level": "suspicious",
+      "namespace": "Crowdsec",
+      "predicate": "Attack",
+      "value": "crowdsecurity/http-open-proxy"
+    },
+    {
+      "level": "suspicious",
+      "namespace": "Crowdsec",
+      "predicate": "Attack",
+      "value": "firewallservices/pf-scan-multi_ports"
+    },
+    {
+      "level": "suspicious",
+      "namespace": "Crowdsec",
+      "predicate": "Attack",
+      "value": "crowdsecurity/http-sqli-probbing-detection"
+    },
+    {
+      "level": "suspicious",
+      "namespace": "Crowdsec",
+      "predicate": "Attack",
+      "value": "crowdsecurity/http-backdoors-attempts"
+    },
+    {
+      "level": "suspicious",
+      "namespace": "Crowdsec",
+      "predicate": "Attack",
+      "value": "crowdsecurity/http-bad-user-agent"
+    },
+    {
+      "level": "suspicious",
+      "namespace": "Crowdsec",
+      "predicate": "Attack",
+      "value": "crowdsecurity/http-crawl-non_statics"
+    },
+    {
+      "level": "suspicious",
+      "namespace": "Crowdsec",
+      "predicate": "Attack",
+      "value": "crowdsecurity/http-admin-interface-probing"
+    },
+    {
+      "level": "suspicious",
+      "namespace": "Crowdsec",
+      "predicate": "Attack",
+      "value": "crowdsecurity/http-dos-swithcing-ua"
+    }
+  ]
+}
