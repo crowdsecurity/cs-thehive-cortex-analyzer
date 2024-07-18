@@ -4,6 +4,7 @@ import json
 import os
 import unittest
 from unittest.mock import MagicMock, patch
+
 from crowdsec_analyzer import CrowdsecAnalyzer
 
 
