@@ -10,6 +10,6 @@ The [public API](https://semver.org/spec/v2.0.0.html#spec-item-1)  for this proj
 ---
 
 
-## [1.0.0](https://github.com/crowdsecurity/cs-thehive-cortex-analyzer/releases/tag/v1.0.0) - 2024-07-??
+## [1.0.0](https://github.com/crowdsecurity/cs-thehive-cortex-analyzer/releases/tag/v1.0.0) - 2024-07-18
 
 - Initial release: synchronization with TheHive/Cortex Analyzers `1.0` release
