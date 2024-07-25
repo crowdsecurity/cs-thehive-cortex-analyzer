@@ -1,6 +1,12 @@
 {
   "taxonomies": [
     {
+        "level": "malicious",
+        "namespace": "Crowdsec",
+        "predicate": "Reputation",
+        "value": "malicious"
+    },
+    {
       "level": "info",
       "namespace": "Crowdsec",
       "predicate": "ASN",

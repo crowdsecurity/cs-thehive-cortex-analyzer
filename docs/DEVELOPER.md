@@ -19,6 +19,7 @@
   - [Set a virtual environment](#set-a-virtual-environment)
   - [Create a test input](#create-a-test-input)
   - [Run and debug the analyzer](#run-and-debug-the-analyzer)
+- [Unit tests](#unit-tests)
 - [Update documentation table of contents](#update-documentation-table-of-contents)
 - [TheHive/Cortex Pull Request](#thehivecortex-pull-request)
 
@@ -26,8 +27,6 @@
 
 
 ## Local installation
-
-
 
 ### Prepare local environment
 
@@ -198,6 +197,7 @@ Create a file `input/input.json` with the following content:
 Run the analyzer:
 
 ```bash
+cd src/analyzer/Crowdsec
 python3 crowdsec_analyzer.py .
 ```
 
@@ -205,6 +205,22 @@ You should see the result in the `output` folder.
 
 Depending on your IDE, it should be straightforward to set breakpoints and debug the analyzer. 
 
+
+## Unit tests
+
+First, prepare your virtual environment:
+
+```bash
+source src/env/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r tests/requirements.txt
+```
+
+Then, run tests: 
+
+```bash
+python -m pytest -v
+```
 
 ## Update documentation table of contents
 
