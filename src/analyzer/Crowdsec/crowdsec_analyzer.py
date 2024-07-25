@@ -26,7 +26,11 @@ class CrowdsecAnalyzer(Analyzer):
             level = (
                 levelred
                 if raw["reputation"] == "malicious"
-                else levelorange if raw["reputation"] == "suspicious" else levelinfo
+                else (
+                    levelorange
+                    if raw["reputation"] == "suspicious"
+                    else levelgreen if raw["reputation"] == "safe" else levelinfo
+                )
             )
             taxonomies.append(
                 self.build_taxonomy(level, namespace, "Reputation", raw["reputation"])
