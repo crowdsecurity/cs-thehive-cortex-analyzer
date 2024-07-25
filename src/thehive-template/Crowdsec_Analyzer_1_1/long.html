@@ -186,6 +186,9 @@
                     <hr>
                 </div>
             </div>
+            <div ng-if="!content.references || content.references.length === 0">
+                <strong>No blocklists found for this IP</strong>
+            </div>
         </div>
     </div>
 
