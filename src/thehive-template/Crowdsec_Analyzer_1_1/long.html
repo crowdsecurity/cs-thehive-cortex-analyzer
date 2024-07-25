@@ -18,17 +18,18 @@
         <div class="panel-heading">
             <strong>CrowdSec</strong> record for "{{artifact.data}}"
             <br/>
-            <div  class="row-no-gutters" ng-if="content.reputation">
-                    <div class="col-md-2">
-                        <span style="vertical-align: middle; padding-right:0.5rem;">Reputation</span><span style="text-transform: capitalize;" class="label label-default"
-                          ng-class="{
+            <div class="row-no-gutters" ng-if="content.reputation">
+                <div class="col-md-2">
+                    <span style="vertical-align: middle; padding-right:0.5rem;">Reputation</span><span
+                        style="text-transform: capitalize;" class="label label-default"
+                        ng-class="{
                                 'label-danger': content.reputation === 'malicious',
                                 'label-warning': content.reputation === 'suspicious'
                               }"
-                          title="{{content.reputation}}">
+                        title="{{content.reputation}}">
                             {{content.reputation}}
                         </span>
-                    </div>
+                </div>
             </div>
             <br/><br/>
             <a target="_blank" href="https://app.crowdsec.net/cti/{{artifact.data}}">View more on app.crowdsec.net</a>
@@ -110,7 +111,6 @@
         <div class="panel-heading">
             <strong>Attack details</strong>
         </div>
-
         <dl class="dl-horizontal"
             ng-if="content.classifications.classifications && content.classifications.classifications.length > 0">
             <dt>Classification</dt>
@@ -176,11 +176,11 @@
         </div>
         <div class="panel-body">
             <div ng-if="content.references && content.references.length > 0">
-                <div class="mb-3" ng-repeat="r in ::content.references">
-                    <div class="mb-1">
+                <div ng-repeat="r in ::content.references">
+                    <div>
                         <strong>{{r.label}}</strong>
                     </div>
-                    <div class="ml-3">
+                    <div>
                         {{r.description}}
                     </div>
                     <hr>
