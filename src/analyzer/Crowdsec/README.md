@@ -92,5 +92,5 @@ e.g.:
 
 #### Requirements
 
-Provide a [CrowdSec CTI Api key](https://www.crowdsec.net/product/threat-intelligence#card-four)
+Provide a [CrowdSec CTI Api key](https://docs.crowdsec.net/u/cti_api/getting_started/#getting-an-api-key)
 as a value for the `api_key` parameter.
