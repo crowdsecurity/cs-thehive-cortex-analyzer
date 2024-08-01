@@ -82,11 +82,14 @@
                 </dd>
             </dl>
             <dl class="dl-horizontal" ng-if="content.mitre_techniques">
-                <dt>MITRE Techniques</dt>
+                <dt>MITRE</dt>
                 <dd class="wrap" style="display: flex; flex-wrap: wrap; padding-top:0.5rem">
                     <span class="label label-default label-danger" title="{{m.description}}"
                           ng-repeat="m in ::content.mitre_techniques" style="margin-bottom: 5px;">
-                        <a style="color:#FFF;text-decoration: underline" target="_blank" href="https://attack.mitre.org/techniques/{{m.name}}">{{m.label}}</a>
+                       <a ng-if="m.name" style="color:#FFF;text-decoration: underline" target="_blank"
+                         ng-href="{{m.name.startsWith('TA') ? 'https://attack.mitre.org/tactics/' + m.name : 'https://attack.mitre.org/techniques/' + m.name}}">
+                        {{m.label}}
+                      </a>
                     </span>
                 </dd>
             </dl>
