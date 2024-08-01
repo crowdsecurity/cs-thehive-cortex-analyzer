@@ -35,6 +35,7 @@ services:
       - "--cortex-keys"
       # put cortex api key once cortex is bootstraped
       - "${CORTEX_KEY}"
+    restart: on-failure
 
   cassandra:
     image: 'cassandra:4'
@@ -92,6 +93,15 @@ services:
     command:
       - --secret
       - "${HIVE_SECRET}"
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.12
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
 
 volumes:
   miniodata:

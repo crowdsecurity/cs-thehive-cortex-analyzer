@@ -3,8 +3,6 @@ name: Documentation links
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -37,3 +35,4 @@ jobs:
           cd extension
           awesome_bot --files README.md --allow-dupe --allow-redirect --allow 401 --skip-save-results --base-url http://localhost:8080/
           awesome_bot docs/*.md --allow-dupe --allow-redirect --allow 401 --white-list http://localhost:9000,http://localhost:9001 --skip-save-results --base-url http://localhost:8080/docs/
+          awesome_bots src/analyzer/Crowdsec/README.md --allow-dupe --allow-redirect --allow 401 --skip-save-results --base-url http://localhost:8080/src/analyzer/Crowdsec/

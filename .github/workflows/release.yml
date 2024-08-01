@@ -104,12 +104,12 @@ jobs:
               echo $JSON_VERSION 
               exit 1
           fi
-          # Check folder src/thehive-template/Crowdsec_VERSION_MAJOR_MINOR_UNDERSCORE exists
-          if [ -d src/thehive-template/Crowdsec_${{ env.VERSION_MAJOR_MINOR_UNDERSCORE }} ]
+          # Check folder src/thehive-template/Crowdsec_Analyzer_VERSION_MAJOR_MINOR_UNDERSCORE exists
+          if [ -d src/thehive-template/Crowdsec_Analyzer_${{ env.VERSION_MAJOR_MINOR_UNDERSCORE }} ]
           then
-              echo "FOLDER Crowdsec_${{ env.VERSION_MAJOR_MINOR_UNDERSCORE }} OK"
+              echo "FOLDER Crowdsec_Analyzer_${{ env.VERSION_MAJOR_MINOR_UNDERSCORE }} OK"
           else
-              echo "FOLDER Crowdsec_${{ env.VERSION_MAJOR_MINOR_UNDERSCORE }} KO"
+              echo "FOLDER Crowdsec_Analyzer_${{ env.VERSION_MAJOR_MINOR_UNDERSCORE }} KO"
               exit 1
           fi
           

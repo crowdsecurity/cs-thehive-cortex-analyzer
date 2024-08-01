@@ -10,9 +10,30 @@ class CrowdsecAnalyzer(Analyzer):
         self.crowdsec_key = self.get_param(
             "config.api_key", None, "Missing Crowdsec API key"
         )
+        self.taxonomy_reputation = self.get_param(
+            "config.taxonomy_reputation", True, None
+        )
+        self.taxonomy_as_name = self.get_param("config.taxonomy_as_name", False, None)
+        self.taxonomy_ip_range_score = self.get_param(
+            "config.taxonomy_ip_range_score", False, None
+        )
+        self.taxonomy_last_seen = self.get_param(
+            "config.taxonomy_last_seen", False, None
+        )
+        self.taxonomy_attack_details = self.get_param(
+            "config.taxonomy_attack_details", False, None
+        )
+        self.taxonomy_behaviors = self.get_param(
+            "config.taxonomy_behaviors", True, None
+        )
+        self.taxonomy_mitre_techniques = self.get_param(
+            "config.taxonomy_mitre_techniques", False, None
+        )
+        self.taxonomy_cves = self.get_param("config.taxonomy_cves", True, None)
+        self.taxonomy_not_found = self.get_param(
+            "config.taxonomy_not_found", True, None
+        )
         self.crowdsec_client = None
-        self.verbose_taxonomies = self.get_param("config.verbose_taxonomies", False)
-        self.polling_interval = self.get_param("config.polling_interval", 60)
 
     def summary(self, raw):
         taxonomies = []
@@ -20,27 +41,42 @@ class CrowdsecAnalyzer(Analyzer):
         levelinfo = "info"
         levelorange = "suspicious"
         levelgreen = "safe"
+        levelred = "malicious"
 
-        if "as_name" in raw:
+        if self.taxonomy_reputation and "reputation" in raw:
+            level = (
+                levelred
+                if raw["reputation"] == "malicious"
+                else (
+                    levelorange
+                    if raw["reputation"] == "suspicious"
+                    else levelgreen if raw["reputation"] == "safe" else levelinfo
+                )
+            )
+            taxonomies.append(
+                self.build_taxonomy(level, namespace, "Reputation", raw["reputation"])
+            )
+
+        if self.taxonomy_as_name and "as_name" in raw:
             taxonomies.append(
                 self.build_taxonomy(levelinfo, namespace, "ASN", raw["as_name"])
             )
 
-        if "ip_range_score" in raw:
+        if self.taxonomy_ip_range_score and "ip_range_score" in raw:
             taxonomies.append(
                 self.build_taxonomy(
                     levelinfo, namespace, "Score", raw["ip_range_score"]
                 )
             )
 
-        if "history" in raw:
+        if self.taxonomy_last_seen and "history" in raw:
             taxonomies.append(
                 self.build_taxonomy(
                     levelinfo, namespace, "LastSeen", raw["history"]["last_seen"]
                 )
             )
 
-        if "attack_details" in raw:
+        if self.taxonomy_attack_details and "attack_details" in raw:
             for attack in raw["attack_details"]:
                 taxonomies.append(
                     self.build_taxonomy(
@@ -48,7 +84,31 @@ class CrowdsecAnalyzer(Analyzer):
                     )
                 )
 
-        if len(taxonomies) == 0:
+        if self.taxonomy_behaviors and "behaviors" in raw:
+            for behavior in raw["behaviors"]:
+                taxonomies.append(
+                    self.build_taxonomy(
+                        levelorange, namespace, "Behavior", behavior["name"]
+                    )
+                )
+
+        if self.taxonomy_mitre_techniques and "mitre_techniques" in raw:
+            for mitre in raw["mitre_techniques"]:
+                taxonomies.append(
+                    self.build_taxonomy(levelorange, namespace, "Mitre", mitre["name"])
+                )
+
+        if self.taxonomy_cves and "cves" in raw:
+            for cve in raw["cves"]:
+                taxonomies.append(
+                    self.build_taxonomy(levelorange, namespace, "CVE", cve)
+                )
+
+        if (
+            self.taxonomy_not_found
+            and "reputation" not in raw
+            and "attack_details" not in raw
+        ):
             taxonomies.append(
                 self.build_taxonomy(levelgreen, namespace, "Threat", "Not found")
             )
