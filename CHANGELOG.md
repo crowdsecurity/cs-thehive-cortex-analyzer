@@ -9,6 +9,28 @@ The [public API](https://semver.org/spec/v2.0.0.html#spec-item-1)  for this proj
 
 ---
 
+## [1.1.0](https://github.com/crowdsecurity/cs-thehive-cortex-analyzer/releases/tag/v1.1.0) - 2024-??-??
+
+### Changed
+
+- Update to the long report to add more information
+
+### Added
+
+- Add new taxonomies: reputation, behaviors, mitre techniques and cves
+
+- Add configuration to enable/disable each taxonomy individually: 
+    - reputation (enabled by default)
+    - as_name (disabled by default)
+    - ip_range_score (disabled by default)
+    - last_seen (disabled by default)
+    - attack_details (disabled by default)
+    - behaviors (enabled by default)
+    - mitre_techniques (disabled by default)
+    - cves (enabled by default)
+    - not found (enabled by default)
+
+---
 
 ## [1.0.0](https://github.com/crowdsecurity/cs-thehive-cortex-analyzer/releases/tag/v1.0.0) - 2024-07-18
 

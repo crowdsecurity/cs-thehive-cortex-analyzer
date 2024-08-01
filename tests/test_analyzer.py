@@ -20,6 +20,7 @@ class CrowdSecAnalyzerTest(unittest.TestCase):
     def setup_class(cls):
         cls.crowdsec_client = MagicMock()
         cls.job_directory = os.path.join(os.path.dirname(__file__), "resources")
+        cls.maxDiff = None
 
     def test_init_analyzer(self):
         analyzer = CrowdsecAnalyzer(job_directory=self.job_directory)

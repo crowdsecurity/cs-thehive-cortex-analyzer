@@ -105,7 +105,7 @@ docker compose down -v
 
 ## Manual test in UI
 
-To be able to manually test the CrowdSec analyzer, you need to create users and organisation with sufficient permissions.
+To be able to manually test the CrowdSec analyzer, you need to create users and organization with sufficient permissions.
 This can be done with following steps:
 
 ### Cortex Api key
@@ -113,8 +113,8 @@ This can be done with following steps:
 - Browse to Cortex: http://localhost:9001.
 - Update database and create an admin login.
 - Log in with the admin account.
-- Create an organisation.
-- Create a user for this organisation with read, analyse and orgadmin rights. Don't forget to edit/save password for this user.
+- Create an organization.
+- Create a user for this organization with read, analyse and orgadmin rights. Don't forget to edit/save password for this user.
 - Create API key for this user and copy the key in `CORTEX_KEY` value of the `docker/.env` file
 
 - Restart the docker environment:
@@ -127,8 +127,8 @@ docker compose down && docker compose up -d
 
 - Browse to TheHive: http://localhost:9000.
 - Log in with the default admin account (username: `admin@thehive.local`, password: `secret`).
-- Create a CrowdSec organisation.
-- Create a user for this organisation with orgadmin profile. Don't forget to edit/save password for this user.
+- Create a CrowdSec organization.
+- Create a user for this organization with orgadmin profile. Don't forget to edit/save password for this user.
 - Logout and login with the new user account.
 - Browse to http://localhost:9001/index.html#!/admin/organizations/CrowdSec
 - Open the Analyzers tab
@@ -142,7 +142,7 @@ docker compose down && docker compose up -d
 
 ### Test and analyze an observable
 
-- Log out and log in to The Hive with the user account you created for the CrowdSec organisation
+- Log out and log in to The Hive with the user account you created for the CrowdSec organization
 - On the top right menu, you should see a `CREATE CASE +` button
 - Create a case with an observable (e.g. an IP address like `1.2.3.4`)
 - Click `...` then `Run Analyzers` and select the CrowdSec analyzer

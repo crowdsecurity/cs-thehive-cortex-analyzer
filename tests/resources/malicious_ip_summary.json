@@ -7,100 +7,58 @@
         "value": "malicious"
     },
     {
-      "level": "info",
+      "level": "suspicious",
       "namespace": "Crowdsec",
-      "predicate": "ASN",
-      "value": "M247 Europe SRL"
-    },
-    {
-      "level": "info",
-      "namespace": "Crowdsec",
-      "predicate": "Score",
-      "value": 5
-    },
-    {
-      "level": "info",
-      "namespace": "Crowdsec",
-      "predicate": "LastSeen",
-      "value": "2024-04-18T08:15:00+00:00"
+      "predicate": "Behavior",
+      "value": "http:scan"
     },
     {
       "level": "suspicious",
       "namespace": "Crowdsec",
-      "predicate": "Attack",
-      "value": "crowdsecurity/CVE-2022-26134"
+      "predicate": "Behavior",
+      "value": "http:exploit"
     },
     {
       "level": "suspicious",
       "namespace": "Crowdsec",
-      "predicate": "Attack",
-      "value": "crowdsecurity/http-path-traversal-probing"
+      "predicate": "Behavior",
+      "value": "http:bruteforce"
     },
     {
       "level": "suspicious",
       "namespace": "Crowdsec",
-      "predicate": "Attack",
-      "value": "crowdsecurity/http-sensitive-files"
+      "predicate": "Behavior",
+      "value": "tcp:scan"
     },
     {
       "level": "suspicious",
       "namespace": "Crowdsec",
-      "predicate": "Attack",
-      "value": "crowdsecurity/http-probing"
+      "predicate": "Behavior",
+      "value": "http:spam"
     },
     {
       "level": "suspicious",
       "namespace": "Crowdsec",
-      "predicate": "Attack",
-      "value": "crowdsecurity/http-cve-2021-41773"
+      "predicate": "Behavior",
+      "value": "http:crawl"
     },
     {
       "level": "suspicious",
       "namespace": "Crowdsec",
-      "predicate": "Attack",
-      "value": "crowdsecurity/http-open-proxy"
+      "predicate": "Behavior",
+      "value": "http:dos"
     },
     {
       "level": "suspicious",
       "namespace": "Crowdsec",
-      "predicate": "Attack",
-      "value": "firewallservices/pf-scan-multi_ports"
+      "predicate": "CVE",
+      "value": "CVE-2021-41773"
     },
     {
       "level": "suspicious",
       "namespace": "Crowdsec",
-      "predicate": "Attack",
-      "value": "crowdsecurity/http-sqli-probbing-detection"
-    },
-    {
-      "level": "suspicious",
-      "namespace": "Crowdsec",
-      "predicate": "Attack",
-      "value": "crowdsecurity/http-backdoors-attempts"
-    },
-    {
-      "level": "suspicious",
-      "namespace": "Crowdsec",
-      "predicate": "Attack",
-      "value": "crowdsecurity/http-bad-user-agent"
-    },
-    {
-      "level": "suspicious",
-      "namespace": "Crowdsec",
-      "predicate": "Attack",
-      "value": "crowdsecurity/http-crawl-non_statics"
-    },
-    {
-      "level": "suspicious",
-      "namespace": "Crowdsec",
-      "predicate": "Attack",
-      "value": "crowdsecurity/http-admin-interface-probing"
-    },
-    {
-      "level": "suspicious",
-      "namespace": "Crowdsec",
-      "predicate": "Attack",
-      "value": "crowdsecurity/http-dos-swithcing-ua"
+      "predicate": "CVE",
+      "value": "CVE-2022-26134"
     }
   ]
 }
