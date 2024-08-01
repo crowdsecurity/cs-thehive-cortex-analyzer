@@ -10,6 +10,7 @@ The [public API](https://semver.org/spec/v2.0.0.html#spec-item-1)  for this proj
 ---
 
 ## [1.1.0](https://github.com/crowdsecurity/cs-thehive-cortex-analyzer/releases/tag/v1.1.0) - 2024-08-01
+[_Compare with previous release_](https://github.com/crowdsecurity/cs-thehive-cortex-analyzer/compare/v1.0.0...v1.1.0)
 
 ### Changed
 
