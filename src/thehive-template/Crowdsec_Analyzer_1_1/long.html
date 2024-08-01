@@ -70,12 +70,12 @@
                 <dd class="wrap" style="display: flex; flex-wrap: wrap; padding-top:0.5rem">
                     <span class="label label-default label-danger" title="{{b.description}}"
                           ng-if="content.behaviors && content.behaviors.length > 0"
-                          ng-repeat="b in ::content.behaviors">
+                          ng-repeat="b in ::content.behaviors" style="margin-bottom: 5px;">
                         {{b.label}}
                     </span>
                     <span class="label label-default label-danger"
                           ng-if="content.cves && content.cves.length > 0"
-                          ng-repeat="cve in content.cves"
+                          ng-repeat="cve in content.cves" style="margin-bottom: 5px;"
                           title="{{cve}}">
                             <a style="color:#FFF;text-decoration: underline" target="_blank" href="https://nvd.nist.gov/vuln/detail/{{cve}}">{{cve}}</a>
                     </span>
