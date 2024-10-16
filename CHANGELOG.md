@@ -12,7 +12,7 @@ The [public API](https://semver.org/spec/v2.0.0.html#spec-item-1)  for this proj
 ## [1.1.0](https://github.com/crowdsecurity/cs-thehive-cortex-analyzer/releases/tag/v1.1.0) - 2024-08-01
 [_Compare with previous release_](https://github.com/crowdsecurity/cs-thehive-cortex-analyzer/compare/v1.0.0...v1.1.0)
 
-[_Release code has been merged in the **TheHive-Project/Cortex-Analyzers** repository_](https://github.com/TheHive-Project/Cortex-Analyzers/commit/https://github.com/TheHive-Project/Cortex-Analyzers/commit/a1c8b4934b58576d3eba629644960c5618cd2d2f)
+[_Release code has been merged in the **TheHive-Project/Cortex-Analyzers** repository_](https://github.com/TheHive-Project/Cortex-Analyzers/commit/a1c8b4934b58576d3eba629644960c5618cd2d2f)
 
 ### Changed
 
