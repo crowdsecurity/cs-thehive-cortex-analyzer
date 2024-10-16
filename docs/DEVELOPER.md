@@ -9,6 +9,7 @@
 - [Local installation](#local-installation)
   - [Prepare local environment](#prepare-local-environment)
   - [Start Docker environment](#start-docker-environment)
+    - [Prepare `docker/.env`](#prepare-dockerenv)
   - [Stop Docker environment](#stop-docker-environment)
 - [Manual test in UI](#manual-test-in-ui)
   - [Cortex Api key](#cortex-api-key)
@@ -24,6 +25,12 @@
 - [TheHive/Cortex Pull Request](#thehivecortex-pull-request)
   - [Sync fork with upstream](#sync-fork-with-upstream)
   - [Update fork sources](#update-fork-sources)
+    - [Create a release](#create-a-release)
+    - [Retrieve zip for release](#retrieve-zip-for-release)
+    - [Create a branch for the Pull Request](#create-a-branch-for-the-pull-request)
+    - [Update sources](#update-sources)
+    - [Test locally before pull request](#test-locally-before-pull-request)
+    - [Open a Pull request](#open-a-pull-request)
   - [During the pull request review](#during-the-pull-request-review)
   - [Once pull request is merged](#once-pull-request-is-merged)
 
@@ -294,12 +301,13 @@ At the end of the Create Release action run, you can download a zip containing t
 
 #### Create a branch for the Pull Request
 
-If your release is `vX.Y.Z`, you can create a `feat/release-X-Y-Z` branch:
+If your release `vX.Y.Z` has been published on `YYYY-MM-DD`, you can create a `feat/release-YYYYMMDD` branch:
+
 
 ```shell
 cd Cortex-Analyzers
 git checkout develop
-git checkout -b feat/release-X-Y-Z
+git checkout -b feat/release-YYYYMMDD
 ```
 
 #### Update sources
@@ -354,71 +362,52 @@ to
 Push your modification 
 
 ```shell
-git push origin feat/release-X.Y.Z
+git push origin feat/release-YYYYMMDD
 ```
 
-Now you can use the `feat/release-X.Y.Z` branch to open a pull request in the Cortex Analyzer repository.
+Now you can use the `feat/release-YYYYMMDD` branch to open a pull request in the Cortex Analyzer repository.
 For the pull request description, you could use the release version description that you wrote in the `CHANGELOG.md` file.
 
 
 
 ### During the pull request review
 
-As long as the pull request is in review state, we should not create a new release. 
-If there are modifications to do, we can do it directly on the `feat/release-X.Y.Z`. 
-All changes made to pass the pull request review must be back ported to a `feat/pr-review-X-Y-Z` branch created in this repository:
+If there are modifications to do, we use the `feat/pr-<pr-number>-ongoing` branch to do them:
 
 ```shell
 cd cs-thehive-cortex-analyzer
 git checkout main
-git checkout -b feat/pr-review-X.Y.Z
+git checkout -b feat/pr-<pr-number>-ongoing
 ```
+
+We have to update `feat/release-YYYYMMDD` and `feat/pr-<pr-number>-ongoing` branches simultaneously.
+
+If modifications are related to the public API of the module (defined at the top of `CHANGELOG.md`), a new release (patch, minor or major depending on the changes) should be created. 
+The release zip archive will be used to update once again the `feat/release-YYYYMMDD` in the Cortex-Analyzers repository fork, updating automatically the current pull request.
+
+If modifications are not related to the public API, the `feat/release-YYYYMMDD` and `feat/pr-<pr-number>-ongoing` branches should be updated directly.
 
 ### Once pull request is merged
 
-If pull request has been merged without any modification, there is nothing more to do.
+Pull Request should have been merged without any modification related to the public API of the module (defined at the top of `CHANGELOG.md`).
 
-If there were modifications, we need to update the sources anc create a patch release.
+Thus, it should be unnecessary to create a new release.
 
-#### Sync fork with upstream
+To backport remaining modifications (test files, documentation, etc.) to the main branch, we can merge the `feat/pr-<pr-number>-ongoing` branch into main:
 
-First, sync the connector fork like we did [here](#sync-fork-with-upstream). 
-
-#### Retrieve last version
-
-After this, you should have the last version of the CrowdSec analyzer in `analyzers/Crowdsec` and `thehive-templates/Crowdsec_X_Y` folders.
-
-You need to retrieve it and commit the differences.
-
-```shell
+```
 cd cs-thehive-cortex-analyzer
-git checkout feat/pr-review-X.Y.Z
+git checkout main
+git merge feat/pr-<pr-number>-ongoing
+git push origin main
 ```
 
-Delete `src/analyzer/Crowdsec` and `src/thehive-template/Crowdsec_X_Y` folder content.
+We can also update the last release description to mention that it is synchronized with the misp-modules repository, by pointing to the merge commit:
 
-Copy all files from the analyzers fork: 
 
+```markdown
+[_Release code has been merged in the **TheHive-Project/Cortex-Analyzers** repository_](https://github.com/TheHive-Project/Cortex-Analyzers/commit/<commit-sha>)
 ```
-cp -r ../Cortex-Analyzers/analyzers/Crowdsec/. ./src/analyzer/Crowdsec
-cp -r ../Cortex-Analyzers/thehive-templates/Crowdsec_X_Y/. ./src/thehive-template/Crowdsec_X_Y
-```
-
-Add and commit the result. Push the `feat/pr-review-X-Y-Z` and merge it into `main` with a pull request.
-
-
-#### Create a new minor release
-
-Once the `main` branch is updated, you can create a new minor `X.Y.Z+1` release with the following CHANGELOG content:
-
-```
-## Changed
-
-- Synchronize content with Cortex Analyzer release [A.B.C](https://github.com/TheHive-Project/Cortex-Analyzers/releases/tag/A.B.C)
-
-```
-
-
 
 
 
